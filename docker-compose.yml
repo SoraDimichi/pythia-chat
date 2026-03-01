@@ -3,6 +3,13 @@ services:
     build: .
     ports:
       - "7860:7860"
+    environment:
+      - HF_HUB_ENABLE_HF_TRANSFER=0
+      - PYTHONUNBUFFERED=1
+    tty: true
+    volumes:
+      - model-cache:/root/.cache/huggingface
+      - ./web.py:/app/web.py
     deploy:
       resources:
         reservations:
@@ -10,3 +17,6 @@ services:
             - driver: nvidia
               count: 1
               capabilities: [gpu]
+
+volumes:
+  model-cache:

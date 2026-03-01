@@ -2,13 +2,7 @@ FROM pytorch/pytorch:2.4.0-cuda12.4-cudnn9-runtime
 
 WORKDIR /app
 
-RUN pip install --no-cache-dir transformers accelerate gradio
-
-# Download model into image
-RUN python -c "\
-from transformers import AutoModelForCausalLM, AutoTokenizer; \
-AutoTokenizer.from_pretrained('EleutherAI/pythia-2.8b-deduped'); \
-AutoModelForCausalLM.from_pretrained('EleutherAI/pythia-2.8b-deduped', use_safetensors=True)"
+RUN pip install --no-cache-dir transformers==4.47.* accelerate==1.2.* gradio==6.8.* bitsandbytes==0.45.*
 
 COPY web.py .
 

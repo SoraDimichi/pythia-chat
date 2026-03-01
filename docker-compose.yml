@@ -9,7 +9,33 @@ services:
     tty: true
     volumes:
       - model-cache:/root/.cache/huggingface
+      - ./.adapters:/app/.adapters
+      - ./config.py:/app/config.py
+      - ./prompt.py:/app/prompt.py
+      - ./model.py:/app/model.py
       - ./web.py:/app/web.py
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+
+  train:
+    build:
+      context: .
+      dockerfile: Dockerfile.train
+    profiles: [train]
+    environment:
+      - HF_HUB_ENABLE_HF_TRANSFER=0
+      - PYTHONUNBUFFERED=1
+    volumes:
+      - model-cache:/root/.cache/huggingface
+      - ./.adapters:/app/.adapters
+      - ./train.py:/app/train.py
+      - ./config.py:/app/config.py
+      - ./prompt.py:/app/prompt.py
     deploy:
       resources:
         reservations:

@@ -4,7 +4,7 @@ WORKDIR /app
 
 RUN pip install --no-cache-dir transformers==4.47.* accelerate==1.2.* gradio==6.8.* bitsandbytes==0.45.* peft==0.14.*
 
-COPY web.py .
+COPY config.py prompt.py model.py web.py ./
 
 EXPOSE 7860
 

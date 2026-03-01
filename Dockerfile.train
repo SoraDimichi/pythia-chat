@@ -1,0 +1,15 @@
+FROM pytorch/pytorch:2.4.0-cuda12.4-cudnn9-runtime
+
+WORKDIR /app
+
+RUN pip install --no-cache-dir \
+    transformers==4.47.* \
+    accelerate==1.2.* \
+    bitsandbytes==0.45.* \
+    peft==0.14.* \
+    trl==0.13.* \
+    datasets==3.2.*
+
+COPY config.py prompt.py train.py ./
+
+CMD ["python", "train.py"]

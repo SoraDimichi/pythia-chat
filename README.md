@@ -45,8 +45,8 @@ ADAPTER_PATH = "./.adapters/pythia-chat-v1"
 
 ## Development
 
-Source files are bind-mounted. After editing, restart without rebuild:
+After editing source files, rebuild:
 
 ```bash
-docker compose restart pythia-chat
+docker compose up --build
 ```

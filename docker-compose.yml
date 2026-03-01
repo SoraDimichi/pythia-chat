@@ -10,10 +10,6 @@ services:
     volumes:
       - model-cache:/root/.cache/huggingface
       - ./.adapters:/app/.adapters
-      - ./config.py:/app/config.py
-      - ./prompt.py:/app/prompt.py
-      - ./model.py:/app/model.py
-      - ./web.py:/app/web.py
     deploy:
       resources:
         reservations:
@@ -33,9 +29,6 @@ services:
     volumes:
       - model-cache:/root/.cache/huggingface
       - ./.adapters:/app/.adapters
-      - ./train.py:/app/train.py
-      - ./config.py:/app/config.py
-      - ./prompt.py:/app/prompt.py
     deploy:
       resources:
         reservations:
